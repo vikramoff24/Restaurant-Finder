@@ -1,14 +1,17 @@
+
 require("dotenv").config()
-const express=require("express")
-const app=express()
+const express=require("express");
+const morgan=require("morgan");
+const app=express();
 
-//Middleware-should be placed top
-app.use((req,res,next)=>
-{
-    console.log("Yeah its middleware");
-    next();
-});
+//Middleware-should be placed top //we can have any number of middleware
+// app.use(morgan("tiny"));
 
+// app.use((req,res,next)=>
+// {
+// console.log(something);
+// next();
+// });
 // Get all Restaurants
 app.get("/api/v1/restaurants",(req,res)=>
 {
