@@ -4,13 +4,18 @@ const morgan=require("morgan");
 const app=express();
 
 //Middleware-should be placed top //we can have any number of middleware
-// app.use(morgan("tiny"));
+app.use(morgan("tiny")); //third party middle ware. //next function is already passed
 
 // app.use((req,res,next)=>
 // {
-// console.log(something);
-// next();
+// console.log(1st middleware);
+// next();//tell to send the flow to next middleware or final route handler 
 // });
+//app.use((req,res,next)=>
+// {
+// console.log(2nd middleware);
+// next();//tell to send the flow to next middleware or final route handler 
+// })
 
 // Get all Restaurants
 app.get("/api/v1/restaurants",(req,res)=>
