@@ -1,4 +1,3 @@
-
 require("dotenv").config()
 const express=require("express");
 const morgan=require("morgan");
@@ -12,6 +11,7 @@ const app=express();
 // console.log(something);
 // next();
 // });
+
 // Get all Restaurants
 app.get("/api/v1/restaurants",(req,res)=>
 {
@@ -26,14 +26,12 @@ app.get("/api/v1/restaurants",(req,res)=>
 });
 
 //Get a Restaurant
-
 app.get("/api/v1/restaurants/:id",(req,res)=>
 {
 console.log(req.params);
 });
 
 //Create a Restaurant
-
 app.post("/api/v1/restaurants",(req,res)=>
 {
 console.log(req);
