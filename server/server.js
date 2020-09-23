@@ -1,4 +1,5 @@
-require("dotenv").config()
+const db = require('./db');
+require("dotenv").config();
 const express=require("express");
 const morgan=require("morgan");
 const app=express();
@@ -21,9 +22,11 @@ app.use(express.json());
 
 
 // Get all Restaurants
-app.get("/api/v1/restaurants",(req,res)=>
+app.get("/api/v1/restaurants",async(req,res)=>
 {
-    console.log("route handler");
+const result= await db.query("select * from restaurants");
+
+    console.log(result);
     //changning the status code
     res.status(200).json({
         status:"success",
