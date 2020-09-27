@@ -42,15 +42,23 @@ console.log(results);
 });
 
 //Get a Restaurant
-app.get("/api/v1/restaurants/:id",(req,res)=>
+app.get("/api/v1/restaurants/:id",async(req,res)=>
 {
-console.log(req.params.id);
+    try{
+        const results=await db.query(`select * from restaurants where id=${req.params.id}`);
+        console.log(results.rows[0])
+        console.log(req.params.id);
 res.status(200).json({
     status:"success",
     data:{
-    restaurant:["kfc"]
+    restaurant:results.rows[0],
     }
 })
+    }catch(err)
+    {
+        console.log(err);
+    }
+
 });
 
 //Create a Restaurant
