@@ -24,16 +24,21 @@ app.use(express.json());
 // Get all Restaurants
 app.get("/api/v1/restaurants",async(req,res)=>
 {
-const result= await db.query("select * from restaurants");
-
-    console.log(result);
+    try{
+const results= await db.query("select * from restaurants");
+console.log(results);
     //changning the status code
     res.status(200).json({
         status:"success",
+        result:results.rows.length,
         data:{
-        restaurant:["mcdonals","kfc"]
-        }
+        restaurant:results.rows[0],
+        },
     });
+}catch(err)
+{
+    console.log(err);
+}
 });
 
 //Get a Restaurant
