@@ -1,7 +1,8 @@
 const db = require('./db');
 require("dotenv").config();
 const express=require("express");
-const morgan=require("morgan");
+//const morgan=require("morgan");
+const cors = require("cors");
 const app=express();
 
 //Middleware-should be placed top //we can have any number of middleware
@@ -17,7 +18,7 @@ const app=express();
 // console.log(2nd middleware);
 // next();//tell to send the flow to next middleware or final route handler 
 // })
-
+app.use(cors());//for allowing request from another port or domain. 
 app.use(express.json());
 
 
@@ -26,7 +27,7 @@ app.get("/api/v1/restaurants",async(req,res)=>
 {
     try{
 const results= await db.query("select * from restaurants");
-console.log(results);
+
     //changning the status code
     res.status(200).json({
         status:"success",
@@ -65,7 +66,6 @@ app.post("/api/v1/restaurants",async(req,res)=>
     try{
 const results=await db.query("insert into restaurants (name,location,price_range) values($1,$2,$3) returning * ",[req.body.name,req.body.location,req.body.price_range] );
 
-console.log(req.body);
 res.status(201).json(
     {
         status:"success",
@@ -92,8 +92,6 @@ res.status(200).json({
         }
     }
     )   
-
-
 }
     catch(err)
     {

@@ -1,7 +1,23 @@
-import React from 'react'
-
+import React ,{useEffect} from 'react'
+import RestaurantFinder from "../apis/RestaurantFinder"
+//useEffect is a Hook which retrives the data from backend as soon as the component pops up;
 const RestaurantList = () => {
-    return (
+
+useEffect(()=>
+    {
+        const fetchData=async()=>//it is used to avoid returning of promises from  use effect as it doesn't like. Promises are returnef by this function
+    {
+try{
+const response= await RestaurantFinder.get("/");
+console.log(response);
+}catch(err)
+{
+console.log(err);
+}};
+fetchData();
+    },[])
+    //empty dependency array where it makes to run only one time when it get pops up, does not run  every time it renders)
+return (
         <div className="list-group">
           <table className="table table-hover table-dark">
               <thead>
